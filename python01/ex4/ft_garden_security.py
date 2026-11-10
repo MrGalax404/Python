@@ -7,7 +7,7 @@
 #   By: shkrasni <shkrasni@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/11/10 13:22:30 by shkrasni            #+#    #+#            #
-#   Updated: 2026/11/10 14:01:30 by shkrasni           ###   ########.fr      #
+#   Updated: 2026/11/10 15:21:30 by shkrasni           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -29,21 +29,23 @@ class Plant:
     def age(self) -> None:
         self._age = self._age + 1
 
-    def set_height(self, height: float) -> None:
+    def set_height(self, height: float) -> bool:
         if (height < 0):
             print(f"{self._name}: Error, height can't be negative")
-            print("Height update rejected")
+            return False
         else:
             self._height = height
             print(f"Height updated: {self._height}cm")
+            return True
 
-    def set_age(self, age: int) -> None:
+    def set_age(self, age: int) -> bool:
         if (age < 0):
             print(f"{self._name}: Error, age can't be negative")
-            print("Age update rejected")
+            return False
         else:
             self._age = age
             print(f"Age updated: {self._age} days")
+            return True
 
     def get_name(self) -> str:
         return self._name
@@ -61,11 +63,15 @@ if __name__ == "__main__":
     print("Plant created: ", end="")
     p1.show()
     print()
-    p1.set_height(25)
-    p1.set_age(30)
+    if (p1.set_height(25) is False):
+        print("Height update rejected")
+    if (p1.set_age(30) is False):
+        print("Age update rejected")
     print()
-    p1.set_height(-10)
-    p1.set_age(-10)
+    if (p1.set_height(-10) is False):
+        print("Height update rejected")
+    if (p1.set_age(-10) is False):
+        print("Age update rejected")
     print()
     print("Current state: ", end="")
     p1.show()
